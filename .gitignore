@@ -1,0 +1,17 @@
+# Runtime state and anything containing real credentials
+storage/logs/*
+!storage/logs/.gitkeep
+storage/backups/
+!storage/.htaccess
+
+# Python
+__pycache__/
+*.pyc
+
+# macOS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# Local tool state
+.claude/

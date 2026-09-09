@@ -1,0 +1,316 @@
+/* GenomePlatform NU - application styles
+   Extracted from the old inline <style> block in header.php. */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    /* Najran University - royal blue and gold.
+       Gold is a FILL colour only: at 2.1:1 on white it can never carry small
+       text, so anything gold-on-white uses --gold-deep instead. Every pairing
+       used in the interface clears WCAG AA (4.5:1); the lowest is 4.83. */
+    --primary:      #1e3a8a;   /* royal blue - brand, 10.36 on white   */
+    --primary-soft: #1d4ed8;   /* lighter royal - links, hover, 6.70   */
+    --secondary:    #172554;   /* navy - gradient end, footer, 14.69   */
+    --gold:         #d4af37;   /* gold fill - dark text on it, 6.99    */
+    --gold-soft:    #f0e0a8;   /* pale gold - rules, tints             */
+    --gold-deep:    #8a6a08;   /* gold-family text on white, 5.07      */
+    --accent:       #8a6a08;   /* legacy token, now gold-family text   */
+
+    /* Risk colours, darkened so they work as text AND as badge fills.
+       Medium moved from amber to burnt orange so it cannot be mistaken
+       for the brand gold. */
+    --success:      #047857;   /* Low risk    5.48 */
+    --warning:      #c2410c;   /* Medium risk 5.18 */
+    --danger:       #b91c1c;   /* High risk   6.47 */
+
+    --dark:      #1f2937;
+    --muted:     #6b7280;
+    --light:     #f9fafb;
+    --border:    #e5e7eb;
+    --radius:    10px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    color: var(--dark);
+    background: var(--light);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main { flex: 1; }
+
+/* ---------- header / nav ---------- */
+
+header {
+    background: var(--primary);
+    border-bottom: 3px solid var(--gold);
+    color: #fff;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.75rem;
+    list-style: none;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    opacity: .9;
+    transition: opacity .2s;
+    padding-bottom: 2px;
+}
+
+.nav-links a:hover { opacity: 1; }
+
+.nav-links a.active {
+    opacity: 1;
+    font-weight: 600;
+    border-bottom: 2px solid var(--gold);
+}
+
+.user-menu { display: flex; gap: .75rem; align-items: center; }
+
+/* ---------- layout ---------- */
+
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem; width: 100%; }
+
+/* Flash messages sit above the page's own container; no doubled gap. */
+.container--flash { padding-bottom: 0; }
+
+.hero {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    border-bottom: 4px solid var(--gold);
+    margin-bottom: 2rem;
+}
+
+.hero h1, .hero h2 { margin-bottom: .5rem; }
+.hero p { opacity: .95; }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+
+/* Stat tiles are short, so they pack tighter than general content cards.
+   At 1200px this fits four across rather than orphaning a fourth. */
+.grid-stats {
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Two or three tiles would otherwise stretch the full container width. */
+.grid-stats--narrow { max-width: 640px; margin-inline: auto; }
+
+.card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+    transition: transform .25s, box-shadow .25s;
+}
+
+.card:hover { transform: translateY(-4px); box-shadow: 0 4px 16px rgba(0, 0, 0, .13); }
+.card--flat:hover { transform: none; box-shadow: 0 2px 8px rgba(0, 0, 0, .08); }
+/* Icon headings line the glyph up with the text. Stat values are also h3s
+   but must stay centred, so they are excluded from the flex rule. */
+.card h2:not(.stat__value),
+.card h3:not(.stat__value) { display: flex; align-items: center; gap: .6rem; }
+
+.stat { text-align: center; }
+.stat__value { display: block; font-size: 2.5rem; margin: .5rem 0; line-height: 1.1; }
+.stat__label { margin: 0; color: var(--muted); }
+
+/* ---------- buttons ---------- */
+
+.btn {
+    display: inline-block;
+    padding: .8rem 1.6rem;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background .2s;
+    text-align: center;
+}
+
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-soft); }
+
+/* Gold carries dark navy text, never white - white on gold is 2.1:1. */
+.btn-secondary { background: var(--gold); color: var(--secondary); }
+.btn-secondary:hover { background: #c19d28; }
+.btn-ghost {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .6);
+}
+.btn-ghost:hover { background: rgba(255, 255, 255, .15); }
+.btn-sm { padding: .35rem .8rem; font-size: .85rem; }
+.btn-block { display: block; width: 100%; }
+
+/* ---------- alerts ---------- */
+
+.alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.alert-error   { background: #fee2e2; color: #991b1b; border-left: 4px solid var(--danger); }
+.alert-success { background: #d1fae5; color: #065f46; border-left: 4px solid var(--success); }
+.alert-info    { background: #e8edfb; color: var(--primary); border-left: 4px solid var(--gold); }
+
+.alert-banner {
+    color: #fff;
+    border: none;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.alert-banner h2 { color: #fff; margin: 0; }
+.alert-banner p  { margin: .25rem 0 0; opacity: .9; }
+.alert-banner i  { font-size: 2.5rem; opacity: .85; }
+
+/* ---------- forms ---------- */
+
+.form-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 260px);
+}
+
+.form-card .card { width: 100%; max-width: 420px; }
+
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; margin-bottom: .5rem; font-weight: 600; }
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: .8rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, .18);
+}
+
+.form-hint { font-size: .85rem; color: var(--muted); margin-top: .35rem; }
+
+/* ---------- tables ---------- */
+
+.table-wrap { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; }
+table thead { background: var(--light); }
+table th, table td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+table th { font-weight: 600; }
+table tbody tr:hover { background: var(--light); }
+
+.table-plain td { border-bottom: none; padding: .7rem 0; }
+.table-plain td:first-child { font-weight: 600; width: 40%; }
+
+/* ---------- misc ---------- */
+
+.badge {
+    display: inline-block;
+    font-weight: 700;
+    padding: .3rem .7rem;
+    border-radius: 999px;
+    color: #fff;
+    font-size: .85rem;
+}
+
+.link { color: var(--primary-soft); text-decoration: none; }
+.link:hover { text-decoration: underline; }
+
+.gauge { position: relative; max-width: 200px; margin: 0 auto; }
+.gauge__value {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.empty-state { text-align: center; color: var(--muted); padding: 2rem; }
+
+code {
+    background: var(--light);
+    padding: .2rem .4rem;
+    border-radius: 3px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+footer {
+    background: var(--secondary);
+    border-top: 3px solid var(--gold);
+    color: #fff;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+footer a { color: var(--gold); }
+
+@media (max-width: 720px) {
+    header { padding: 1rem; }
+    .navbar { justify-content: center; text-align: center; }
+    .container { padding: 1.25rem; }
+    .hero { padding: 2rem 1rem; }
+    .card { padding: 1.5rem; }
+}

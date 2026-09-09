@@ -1,0 +1,35 @@
+# GenomePlatform NU - front controller
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Never expose application internals, even though the rules below
+    # would normally skip them; the per-directory .htaccess files are the
+    # real guard, this is defence in depth.
+    RewriteRule ^(app|core|config|storage|bin|tests|Model)(/|$) - [F,L]
+
+    # Serve real files and directories as-is (assets, setup.html, ...).
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Everything else goes to the front controller.
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# No directory listings.
+Options -Indexes
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "same-origin"
+</IfModule>
+
+# Keep dotfiles, SQL dumps and logs out of the browser.
+<FilesMatch "(^\.|\.(sql|log|md|txt|ini|py|sh|ipynb|csv)$)">
+    Require all denied
+</FilesMatch>
+
+# index.php is the only entry point.
+DirectoryIndex index.php

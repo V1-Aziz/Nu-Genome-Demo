@@ -1,0 +1,2 @@
+# Application code - not directly reachable over HTTP.
+Require all denied
