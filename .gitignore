@@ -4,6 +4,9 @@ storage/logs/*
 storage/backups/
 !storage/.htaccess
 
+# Plaintext credential reference - local only, never commit
+CREDENTIALS.md
+
 # Python
 __pycache__/
 *.pyc

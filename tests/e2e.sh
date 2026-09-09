@@ -48,7 +48,7 @@ check "  -> target"     "/login" "$(loc $B/dashboard)"
 
 echo "== CSRF is enforced on POST =="
 rm -f ${TMPDIR:-/tmp}/gp_e2e/csrf.txt
-check "POST /login without token bounces" "/login" "$(rloc -c ${TMPDIR:-/tmp}/gp_e2e/csrf.txt -b ${TMPDIR:-/tmp}/gp_e2e/csrf.txt -X POST -d "email=admin@genomeplatform.local&password=Quartz-Quartz-4254" $B/login)"
+check "POST /login without token bounces" "/login" "$(rloc -c ${TMPDIR:-/tmp}/gp_e2e/csrf.txt -b ${TMPDIR:-/tmp}/gp_e2e/csrf.txt -X POST -d "email=admin@genomeplatform.local&password=asas1212" $B/login)"
 check "  and does NOT authenticate"      302     "$(code -c ${TMPDIR:-/tmp}/gp_e2e/csrf.txt -b ${TMPDIR:-/tmp}/gp_e2e/csrf.txt $B/dashboard)"
 
 echo "== registration =="
@@ -133,7 +133,7 @@ rm -f ${TMPDIR:-/tmp}/gp_e2e/c4.txt
 T=$(token ${TMPDIR:-/tmp}/gp_e2e/c4.txt $B/login)
 check "seeded admin can log in" "/dashboard" \
   "$(rloc -c ${TMPDIR:-/tmp}/gp_e2e/c4.txt -b ${TMPDIR:-/tmp}/gp_e2e/c4.txt -X POST \
-     -d "_token=$T&email=admin@genomeplatform.local&password=Quartz-Quartz-4254" $B/login)"
+     -d "_token=$T&email=admin@genomeplatform.local&password=asas1212" $B/login)"
 curl -s -c ${TMPDIR:-/tmp}/gp_e2e/c4.txt -b ${TMPDIR:-/tmp}/gp_e2e/c4.txt $B/dashboard > ${TMPDIR:-/tmp}/gp_e2e/admin.html
 contains "admin role shown" "admin" ${TMPDIR:-/tmp}/gp_e2e/admin.html
 
@@ -177,13 +177,13 @@ echo "== open redirect is not possible via intended_url =="
 rm -f ${TMPDIR:-/tmp}/gp_e2e/c8.txt
 curl -s -o /dev/null -c ${TMPDIR:-/tmp}/gp_e2e/c8.txt -b ${TMPDIR:-/tmp}/gp_e2e/c8.txt "$B/dashboard"
 T=$(token ${TMPDIR:-/tmp}/gp_e2e/c8.txt $B/login)
-check "login after guest bounce -> /dashboard" "/dashboard" "$(rloc -c ${TMPDIR:-/tmp}/gp_e2e/c8.txt -b ${TMPDIR:-/tmp}/gp_e2e/c8.txt -X POST --data-urlencode "_token=$T" --data-urlencode "email=admin@genomeplatform.local" --data-urlencode "password=Quartz-Quartz-4254" $B/login)"
+check "login after guest bounce -> /dashboard" "/dashboard" "$(rloc -c ${TMPDIR:-/tmp}/gp_e2e/c8.txt -b ${TMPDIR:-/tmp}/gp_e2e/c8.txt -X POST --data-urlencode "_token=$T" --data-urlencode "email=admin@genomeplatform.local" --data-urlencode "password=asas1212" $B/login)"
 
 # A hostile intended_url must not be honoured
 rm -f ${TMPDIR:-/tmp}/gp_e2e/c9.txt
 curl -s -o /dev/null -c ${TMPDIR:-/tmp}/gp_e2e/c9.txt -b ${TMPDIR:-/tmp}/gp_e2e/c9.txt "$B/report/1"
 T=$(token ${TMPDIR:-/tmp}/gp_e2e/c9.txt $B/login)
-check "intended_url stays in-app" "/report/1" "$(rloc -c ${TMPDIR:-/tmp}/gp_e2e/c9.txt -b ${TMPDIR:-/tmp}/gp_e2e/c9.txt -X POST --data-urlencode "_token=$T" --data-urlencode "email=admin@genomeplatform.local" --data-urlencode "password=Quartz-Quartz-4254" $B/login)"
+check "intended_url stays in-app" "/report/1" "$(rloc -c ${TMPDIR:-/tmp}/gp_e2e/c9.txt -b ${TMPDIR:-/tmp}/gp_e2e/c9.txt -X POST --data-urlencode "_token=$T" --data-urlencode "email=admin@genomeplatform.local" --data-urlencode "password=asas1212" $B/login)"
 
 echo
 echo "=============================="

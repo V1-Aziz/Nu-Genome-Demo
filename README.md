@@ -37,7 +37,7 @@ Then open <http://localhost/>.
 
 | Email | Password | Role |
 |---|---|---|
-| `admin@genomeplatform.local` | `Quartz-Quartz-4254` | admin |
+| `admin@genomeplatform.local` | `asas1212` | admin |
 | `researcher@genomeplatform.local` | `ChangeMe!Research1` | researcher |
 | `user@genomeplatform.local` | `ChangeMe!User1` | user |
 

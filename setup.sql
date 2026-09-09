@@ -47,14 +47,14 @@ CREATE TABLE IF NOT EXISTS analysis_results (
 -- These bcrypt hashes are real and do verify. The ones in the previous
 -- schema were malformed, so those accounts could never be logged into.
 --
---   admin@genomeplatform.local       Quartz-Quartz-4254
+--   admin@genomeplatform.local       asas1212
 --   researcher@genomeplatform.local  ChangeMe!Research1
 --   user@genomeplatform.local        ChangeMe!User1
 --
 -- Change or delete them before this is reachable by anyone else.
 
 INSERT INTO users (username, email, password, role) VALUES
-    ('admin',      'admin@genomeplatform.local',      '$2y$10$xp2lCZPvdpkdhRo6psIBHeSpzMl3iQGr45HREu.Xf.7aF2CNCveVi',    'admin'),
+    ('admin',      'admin@genomeplatform.local',      '$2y$10$zKGzohU744z7DElIHwdLbOwYohQrSMMZ4iHr5VLklYer8Fu5v.i9K',    'admin'),
     ('researcher', 'researcher@genomeplatform.local', '$2y$10$VtNWSgHKDsrR4JNYhynrhOgVJNm6H6o2JR6Zv8H4pzmcG/6cfwYSG', 'researcher'),
     ('demo',       'user@genomeplatform.local',       '$2y$10$RhNpGaGJNNfA40wyi7CqT.9lAid5rzSUAjqNY5c4AQJ/kSdn2ItwC',     'user')
 ON DUPLICATE KEY UPDATE username = username;
